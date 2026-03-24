@@ -15,9 +15,7 @@ const ToolOutputSchema = ToolSchema.shape.outputSchema;
 export type ToolOutput = z.infer<typeof ToolOutputSchema>;
 
 export const SearchInputSchema = z.object({
-	query: z
-		.string()
-		.describe(`The question/task to search for relevant data queries to answer. Use the fetch tool to retrieve the data for individual queries. The datasource id should be passed as part of the query. With the syntax 
+    query: z.string().describe(`The question/task to search for relevant data queries to answer. Use the fetch tool to retrieve the data for individual queries. The datasource id should be passed as part of the query. With the syntax 
     datasource:<id> <search-query>. The search-query can be any textual question.
         
         For example:
@@ -156,10 +154,10 @@ export class OpenAIDeepResearchMCPServer extends BaseMCPServer {
 				"No relevant data sources found, please provide a datasource id in the query",
 			);
 		}
-		const results = dataSources.map((d) => ({
-			id: `datasource:///${d.header.guid}`,
-			title: d.header.displayName,
-			text: `Datasource Description: ${d.header.description}. Confidence that this datasource is relevant to the query: ${d.confidence}. Reasoning for the confidence: ${d.llmReasoning}. 
+		const results = dataSources.map(d => ({
+			id: `datasource:///${d.details?.data_source_identifier ?? ""}`,
+			title: d.details?.data_source_name ?? "",
+			text: `Datasource Description: ${d.details?.description ?? ""}. Confidence that this datasource is relevant to the query: ${d.confidence}. Reasoning for the confidence: ${d.reasoning ?? ""}. 
             Use this datasource to search for relevant questions and to get answers for the questions. 
             Use the search tool to search for relevant questions with the format "datasource:<id> <query-with-spaces>" and the fetch tool to get answers for the questions.`,
 		}));

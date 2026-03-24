@@ -7,7 +7,7 @@
     "url": "https://github.com/thoughtspot/mcp-server",
     "source": "github"
   },
-  "version": "2.0.0",
+  "version": "1.0.1",
   "remotes": [{
     "type": "streamable-http",
     "url": "https://agent.thoughtspot.app/mcp"
@@ -18,35 +18,35 @@
     "type": "streamable-http",
     "url": "https://agent.thoughtspot.app/bearer/mcp",
     "headers": [
-        {
-          "name": "Authorization", 
-          "description": "Bearer token for authentication, have the ts-host as 'token@ts-host' or as a separate 'x-ts-host' header",
-          "is_required": true,
-          "is_secret": true
-        },
-        {
-          "name": "X-TS-Host", 
-          "description": "ThoughtSpot instance URL, if not provided in the authorization header",
-          "is_required": false,  
-          "is_secret": false
-        }
+      {
+        "name": "Authorization",
+        "description": "Bearer token for authentication, have the ts-host as 'token@ts-host' or as a separate 'x-ts-host' header",
+        "is_required": true,
+        "is_secret": true
+      },
+      {
+        "name": "X-TS-Host",
+        "description": "ThoughtSpot instance URL, if not provided in the authorization header",
+        "is_required": false,
+        "is_secret": false
+      }
     ]
   }, {
     "type": "sse",
     "url": "https://agent.thoughtspot.app/bearer/sse",
     "headers": [
-        {
-          "name": "Authorization", 
-          "description": "Bearer token for authentication, have the ts-host as 'token@ts-host' or as a separate 'x-ts-host' header",
-          "is_required": true,
-          "is_secret": true
-        },
-        {
-          "name": "X-TS-Host", 
-          "description": "ThoughtSpot instance URL, if not provided in the authorization header",
-          "is_required": false,  
-          "is_secret": false
-        }
+      {
+        "name": "Authorization",
+        "description": "Bearer token for authentication, have the ts-host as 'token@ts-host' or as a separate 'x-ts-host' header",
+        "is_required": true,
+        "is_secret": true
+      },
+      {
+        "name": "X-TS-Host",
+        "description": "ThoughtSpot instance URL, if not provided in the authorization header",
+        "is_required": false,
+        "is_secret": false
+      }
     ]
   }],
   "capabilities": {
@@ -64,24 +64,28 @@
         "description": "Get the answer to a specific question from ThoughtSpot analytics"
       },
       {
-        "name": "createConversation",
-        "description": "Begin a conversation with Spotter agent"
-      },
-      {
-        "name": "sendConversationMessage",
-        "description": "Send messages to a conversation with Spotter agent"
-      },
-      {
-        "name": "getConversationUpdates",
-        "description": "Get response updates from a conversation with Spotter agent"
-      },
-      {
         "name": "createLiveboard",
         "description": "Create a liveboard from a list of answers"
       },
       {
         "name": "getDataSourceSuggestions",
         "description": "Get datasource suggestions for a given query"
+      },
+      {
+        "name": "createAgentConversation",
+        "description": "Create a conversation with a given data source"
+      },
+      {
+        "name": "sendAgentMessage",
+        "description": "Send a message in a conversation"
+      },
+      {
+        "name": "sendAgentMessageAsync",
+        "description": "Send a message in a conversation, and allow the response to be generated asynchronously"
+      },
+      {
+        "name": "getAgentMessageUpdates",
+        "description": "Retrieve the latest messages from an asynchronous conversation"
       }
     ],
     "resources": [
